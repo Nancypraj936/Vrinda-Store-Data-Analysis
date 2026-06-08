@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)file:///C:/Users/HP/Downloads/vrinda_insights.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vrinda Store Insights</title>
+<link href="./Vrinda_Store_Insights_files/css2" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0d0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .card {
+    width: 900px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Top accent bar */
+  .accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #e8702a, #f5a623, #e8702a);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  .inner {
+    padding: 48px 52px 44px;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .store-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e8702a;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: #f0ece4;
+    line-height: 1.1;
+  }
+
+  .title span {
+    color: #e8702a;
+  }
+
+  .year-badge {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 2px;
+    padding: 10px 18px;
+    text-align: right;
+  }
+
+  .year-badge .year {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #e8702a;
+    display: block;
+  }
+
+  .year-badge .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, #e8702a33, #2a2a2a, transparent);
+    margin-bottom: 36px;
+  }
+
+  /* Insights grid */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .insight-card {
+    background: #161616;
+    border: 1px solid #222;
+    border-left: 3px solid #e8702a;
+    padding: 20px 22px;
+    border-radius: 2px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .insight-card:nth-child(1) { animation-delay: 0.1s; }
+  .insight-card:nth-child(2) { animation-delay: 0.2s; }
+  .insight-card:nth-child(3) { animation-delay: 0.3s; }
+  .insight-card:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stat-pill {
+    background: #e8702a15;
+    border: 1px solid #e8702a44;
+    color: #e8702a;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 2px;
+    white-space: nowrap;
+    min-width: 72px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .insight-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .insight-text .topic {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+    font-weight: 500;
+  }
+
+  .insight-text .detail {
+    font-size: 14px;
+    color: #c8c0b4;
+    line-height: 1.4;
+    font-weight: 300;
+  }
+
+  .insight-text strong {
+    color: #f0ece4;
+    font-weight: 500;
+  }
+
+  /* Conclusion box */
+  .conclusion {
+    background: linear-gradient(135deg, #1c1208, #1a1410);
+    border: 1px solid #e8702a33;
+    border-radius: 2px;
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.55s forwards;
+  }
+
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #e8702a, #f5a623);
+  }
+
+  .conclusion-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e8702a;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .conclusion-text {
+    font-size: 15px;
+    color: #c8c0b4;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .conclusion-text strong {
+    color: #f5c07a;
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: #333;
+    letter-spacing: 1px;
+  }
+
+  .footer-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #333;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #e8702a;
+    border-radius: 50%;
+    margin: 0 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="accent-bar"></div>
+  <div class="inner">
+
+    <div class="header">
+      <div>
+        <div class="store-label">Data Analysis Report</div>
+        <div class="title">Vrinda Store<br><span>Key Insights</span></div>
+      </div>
+      <div class="year-badge">
+        <span class="year">2022</span>
+        <span class="label">Annual Report</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="stat-pill">~65%</div>
+        <div class="insight-text">
+          <span class="topic">Gender</span>
+          <span class="detail"><strong>Women</strong> are more likely to buy compared to men</span>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="stat-pill">~35%</div>
+        <div class="insight-text">
+          <span class="topic">Geography</span>
+          <span class="detail"><strong>Maharashtra, Karnataka &amp; UP</strong> are top 3 states</span>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="stat-pill">~50%</div>
+        <div class="insight-text">
+          <span class="topic">Age Group</span>
+          <span class="detail"><strong>Adults (30–49 yrs)</strong> are the max contributing age group</span>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="stat-pill">~80%</div>
+        <div class="insight-text">
+          <span class="topic">Channels</span>
+          <span class="detail"><strong>Amazon, Flipkart &amp; Myntra</strong> drive most of the orders</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="conclusion">
+      <div class="conclusion-label">✦ Final Recommendation</div>
+      <div class="conclusion-text">
+        Target <strong>women customers</strong> of age group <strong>30–49 yrs</strong> 
+        living in <strong>Maharashtra, Karnataka and Uttar Pradesh</strong> by showing 
+        ads, offers, and coupons available on 
+        <strong>Amazon, Flipkart and Myntra</strong>.
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="footer-brand">Vrinda Store</span>
+      <span>
+        <span class="dot"></span>
+        <span class="footer-tag">Excel Dashboard Project</span>
+        <span class="dot"></span>
+      </span>
+      <span class="footer-tag">Nancy Prajapati</span>
+    </div>
+
+  </div>
+</div>
+
+
+</body></html>
